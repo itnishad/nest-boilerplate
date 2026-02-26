@@ -29,8 +29,10 @@
     "@prisma/client": "^7.3.0",
     "ioredis": "^5.9.3",
     "lodash": "^4.17.21",
+    "nest-winston": "^1.10.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "winston": "^3.19.0",
     "zod": "^4.3.5"
   },
   "devDependencies": {
