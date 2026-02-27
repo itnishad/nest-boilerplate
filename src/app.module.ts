@@ -7,10 +7,10 @@ import { RedisModule } from './common/redis/redis.module';
 import { WinstonModule } from 'nest-winston';
 import config from './common/config/app.config'
 import { winstonConfig } from './common/config/winston.config';
-
+import { LoggerModule } from './common/modules/logger.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({isGlobal: true, load: [config]}), WinstonModule.forRoot(winstonConfig), DatabaseModule, RedisModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true, load: [config] }), WinstonModule.forRoot(winstonConfig), DatabaseModule, RedisModule, LoggerModule],
   controllers: [AppController],
   providers: [AppService],
 })
