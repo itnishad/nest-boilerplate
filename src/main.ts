@@ -10,6 +10,7 @@ import {
 import { Logger } from 'winston';
 import helmet from 'helmet';
 import { helmetConfigForProd, helmetConfigForDev } from './common/config/helmet.config';
+import { GlobalExceptionFilter } from './common/filters/exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -21,10 +22,11 @@ async function bootstrap() {
 
   app.useLogger(nestLogger);
 
-  // const winstonLogger = app.get<Logger>(WINSTON_MODULE_PROVIDER)
-
   const configService = app.get<ConfigService>(ConfigService);
-  
+  const winstonLogger = app.get<Logger>(WINSTON_MODULE_PROVIDER)
+  app.useGlobalFilters(new GlobalExceptionFilter(winstonLogger, configService))
+
+
   const helmetConfig = isProduction ? helmetConfigForProd : helmetConfigForDev;
   app.use(helmet(helmetConfig));
 
