@@ -1,4 +1,6 @@
 import { z } from 'zod';
+import 'dotenv/config';
+
 interface AppConfig {
     appName: string,
     port: number,
@@ -10,12 +12,12 @@ interface AppConfig {
 }
 
 const envSchema = z.object({
-    appName: z.string().default('MyApp'),
-    port: z.coerce.number().default(8000),
+    appName: z.string(),
+    port: z.coerce.number(),
     DATABASE_URL: z.string(),
     security: z.object({
-        jwtSecret: z.string().default('your_jwt_secret'),
-        saltRounds: z.coerce.number().default(10),
+        jwtSecret: z.string(),
+        saltRounds: z.coerce.number(),
     }),
 });
 
@@ -25,7 +27,7 @@ export default (): Record<string, unknown> => {
     port: parseInt(process.env.PORT || '3000'),
     DATABASE_URL: process.env.DATABASE_URL || '',
     security: {
-        jwtSecret: process.env.JWT_SECRECT || '',
+        jwtSecret: process.env.JWT_SECRECT || 'your_jwt_secret',
         saltRounds: parseInt(process.env.SALTROUND || '10')
     }
 }
