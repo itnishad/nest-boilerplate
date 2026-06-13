@@ -1,7 +1,7 @@
 import { Global, Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ThrottlerGuard, ThrottlerModule, ThrottlerStorageService } from '@nestjs/throttler'
-import { THROTTLER_CONFIG } from "../config/throttler.config";
+import { THROTTLER_CONFIG } from "#src/common/config/throttler.config";
 import Redis from "ioredis";
 import {ThrottlerStorageRedisService} from '@nest-lab/throttler-storage-redis'
 import { APP_GUARD } from "@nestjs/core";

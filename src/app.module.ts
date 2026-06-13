@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from '#src/app.controller';
+import { AppService } from '#src/app.service';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './database/database.module';
-import { RedisModule } from './common/redis/redis.module';
+import { DatabaseModule } from '#src/database/database.module';
+import { RedisModule } from '#src/common/redis/redis.module';
 import { WinstonModule } from 'nest-winston';
-import config from './common/config/app.config'
-import { winstonConfig } from './common/config/winston.config';
-import { LoggerModule } from './common/modules/logger.module';
-import { RateLimitModule } from './common/modules/rate-limit.module';
+import config from '#src/common/config/app.config'
+import { winstonConfig } from '#src/common/config/winston.config';
+import { LoggerModule } from '#src/common/modules/logger.module';
+import { RateLimitModule } from '#src/common/modules/rate-limit.module';
 
 @Module({
   imports: [

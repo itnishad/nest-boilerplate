@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
-import { AppModule } from './app.module';
+import { AppModule } from '#src/app.module';
 import { LoggerService, VersioningType } from '@nestjs/common';
 import {
   WINSTON_MODULE_NEST_PROVIDER,
@@ -9,8 +9,8 @@ import {
 } from 'nest-winston'
 import { Logger } from 'winston';
 import helmet from 'helmet';
-import { helmetConfigForProd, helmetConfigForDev } from './common/config/helmet.config';
-import { GlobalExceptionFilter } from './common/filters/exception.filter';
+import { helmetConfigForProd, helmetConfigForDev } from '#src/common/config/helmet.config';
+import { GlobalExceptionFilter } from '#src/common/filters/exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
