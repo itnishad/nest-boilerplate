@@ -50,6 +50,12 @@ async function bootstrap() {
     jsonDocumentUrl: 'swagger/json'
   });
 
-  await app.listen(configService.get<number>('port') ?? 3000);
+  const PORT = configService.get<number>('port') ?? 3000
+
+  await app.listen(PORT, ()=>{
+    console.log(`Application is running on ${PORT}`)
+  });
 }
-bootstrap();
+bootstrap().catch((err) => {
+  console.error('Error during bootstrap: ', err)
+});
