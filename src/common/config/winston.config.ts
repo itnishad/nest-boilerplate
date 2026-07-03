@@ -1,6 +1,5 @@
 import { WinstonModuleOptions } from "nest-winston";
 import * as winston from 'winston'
-import 'dotenv/config';
 
 const transports: winston.transport[] = [
     new winston.transports.Console({

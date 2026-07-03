@@ -1,35 +1,14 @@
 import { z } from 'zod';
-import 'dotenv/config';
-
-interface AppConfig {
-    appName: string,
-    port: number,
-    DATABASE_URL: string,
-    security: {
-        jwtSecret: string,
-        saltRounds: number,
-    }
-}
 
 const envSchema = z.object({
-    appName: z.string(),
-    port: z.coerce.number(),
-    DATABASE_URL: z.string(),
-    security: z.object({
-        jwtSecret: z.string(),
-        saltRounds: z.coerce.number(),
-    }),
+  PORT: z.coerce.number().default(3000),
+  DATABASE_URL: z.string().min(1, 'DATABASE_URL is required'),
+  JWT_SECRET: z.string().min(1, 'JWT_SECRET is required'),
+  SALTROUND: z.coerce.number().default(10),
 });
 
-export default (): Record<string, unknown> => {
-    const config: AppConfig = {
-    appName: 'MyApp',
-    port: parseInt(process.env.PORT || '3000'),
-    DATABASE_URL: process.env.DATABASE_URL || '',
-    security: {
-        jwtSecret: process.env.JWT_SECRECT || 'your_jwt_secret',
-        saltRounds: parseInt(process.env.SALTROUND || '10')
-    }
-}
-    return envSchema.parse(config)
+export type AppConfig = z.infer<typeof envSchema>;
+
+export default (): AppConfig => {
+  return envSchema.parse(process.env);
 };

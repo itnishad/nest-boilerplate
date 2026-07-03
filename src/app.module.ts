@@ -12,7 +12,7 @@ import { RateLimitModule } from '#src/common/modules/rate-limit.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, load: [config] }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env'], load: [config] }),
     WinstonModule.forRoot(winstonConfig),
     DatabaseModule,
     RedisModule,
