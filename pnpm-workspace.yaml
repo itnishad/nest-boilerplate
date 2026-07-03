@@ -1,5 +1,5 @@
-onlyBuiltDependencies:
-  - "@prisma/engines"
-  - "@scarf/scarf"
-  - prisma
-  - unrs-resolver
+allowBuilds:
+  '@prisma/engines': true
+  prisma: true
+  '@scarf/scarf': true
+  unrs-resolver: true

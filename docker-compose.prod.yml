@@ -1,0 +1,8 @@
+services:
+  api:
+    build:
+      target: prod
+    environment:
+      - NODE_ENV=production
+    volumes: []
+    restart: unless-stopped

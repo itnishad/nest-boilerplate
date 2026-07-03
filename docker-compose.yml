@@ -1,23 +1,48 @@
 services:
-  api:
-    container_name: nestjs_dev_container
-    build: 
-      context: .
-      dockerfile: Dockerfile
-
+  postgres:
+    image: postgres:16-alpine
+    container_name: nestjs_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nestBoilerplate
     ports:
-      - 4000:8000
-    
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - nest-net
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
+  api:
+    container_name: nestjs_dev_container
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 4000:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/nestBoilerplate
+      - PORT=8000
+      - LOG_LEVEL=debug
     volumes:
       - .:/app
       - /app/node_modules
-
-    environment:
-      - NODE_ENV=development
+    networks:
+      - nest-net
 
 networks:
   nest-net:
     driver: bridge
+
+volumes:
+  postgres_data:

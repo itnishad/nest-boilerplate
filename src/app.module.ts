@@ -15,9 +15,9 @@ import { RateLimitModule } from '#src/common/modules/rate-limit.module';
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env'], load: [config] }),
     WinstonModule.forRoot(winstonConfig),
     DatabaseModule,
-    RedisModule,
+    // RedisModule,
     LoggerModule,
-    RateLimitModule
+    // RateLimitModule
   ],
   controllers: [AppController],
   providers: [AppService],
